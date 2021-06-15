@@ -21,7 +21,7 @@ if ROOM_ID not in client.rooms:
     client.join_room(ROOM_ID)
 room: Room = client.rooms[ROOM_ID]
 
-
+room.send_text("Starting")
 
 def get_times():
     r = get("https://eteenindus.mnt.ee/public/vabadSoidueksamiajad.xhtml")
@@ -52,7 +52,7 @@ def main():
     latest_times = sorted(times.get("Tallinn", []))
     latest_times_pretty=', '.join([t.strftime('%d.%m.%Y %H:%M') for t in latest_times])
     print(datetime.now(), "Slots:", latest_times_pretty)
-    if latest_times and latest_times[0] < datetime(2021, 9, 7, 12, 30):
+    if latest_times and latest_times[0] < datetime(2021, 8, 16, 14, 30):
         room.send_text(f"Slot Free Tallinn {latest_times_pretty}")
         room.send_text("https://eteenindus.mnt.ee/main.jsf")
 
